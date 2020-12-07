@@ -1,0 +1,28 @@
+func permute(nums []int) [][]int {
+	resLisit := new([][]int)
+	visited := map[int]bool{}
+	permuteRes(nums,[]int{},resLisit,visited)
+	return *resLisit
+}
+func permuteRes(nums []int, path []int,resLisit *[][]int,visited map[int]bool) {
+//terminator
+if len(path) >= len(nums){
+	temp := make([]int,len(path))
+	copy(temp,path)
+	*resLisit = append(*resLisit,temp)
+	return
+}
+//process current logic
+for _,i := range nums{
+	if visited[i] {
+	   continue
+	}
+	path = append(path,i)
+	visited[i] = true
+	//drill down
+	permuteRes(nums,path,resLisit,visited)
+	path = path[:len(path)-1]
+	visited[i] = false
+	}
+
+}

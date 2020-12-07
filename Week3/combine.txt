@@ -1,0 +1,24 @@
+func combine(n int, k int) [][]int {
+ resList := new([][]int)
+ combineres(n,k,1,[]int{},resList)
+ return *resList
+}
+
+func combineres(n int,k int,start int,path []int,resList *[][]int){
+    //terminator
+    if len(path) == k{
+        temp := make([]int,len(path))
+        copy(temp,path)
+        *resList = append(*resList,temp)
+        return
+    }
+    //process current logic
+    for i:=start;i <= n;i++{
+        path = append(path,i)
+        //drill down
+        combineres(n,k,i+1,path,resList)
+        path = path[:len(path)-1]
+    }
+    
+    //reverse states
+}
